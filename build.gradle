@@ -1,6 +1,6 @@
-group 'com.mateuyabar'
-/*version '1.0-SNAPSHOT'*/
-
+//group 'com.mateuyabar'
+//version '1.0-SNAPSHOT'
+/*
 apply plugin: 'java'
 apply plugin: 'maven'
 
@@ -14,4 +14,4 @@ repositories {
 }
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-}
+}*/
