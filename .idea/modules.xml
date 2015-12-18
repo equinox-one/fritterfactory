@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/fritterfactory/fritterfactory.iml" filepath="$PROJECT_DIR$/fritterfactory/fritterfactory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fritterfactory-example/fritterfactory-example.iml" filepath="$PROJECT_DIR$/fritterfactory-example/fritterfactory-example.iml" />
       <module fileurl="file://$PROJECT_DIR$/fritterfactory-project.iml" filepath="$PROJECT_DIR$/fritterfactory-project.iml" />
     </modules>
   </component>

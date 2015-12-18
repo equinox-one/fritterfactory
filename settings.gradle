@@ -1,3 +1,4 @@
 rootProject.name = 'fritterfactory-project'
 include 'fritterfactory'
+include 'fritterfactory-example'
 
