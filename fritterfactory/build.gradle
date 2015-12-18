@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile 'javax.inject:javax.inject:1'
+    testCompile 'org.mockito:mockito-core:1.+'
+    //String generation
+    compile 'com.thedeanda:lorem:2.0'
+}
