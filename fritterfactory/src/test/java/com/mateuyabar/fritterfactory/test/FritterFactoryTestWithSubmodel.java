@@ -2,6 +2,7 @@ package com.mateuyabar.fritterfactory.test;
 
 
 import com.mateuyabar.fritterfactory.FritterFactory;
+import com.mateuyabar.fritterfactory.mold.ClassMold;
 import com.mateuyabar.fritterfactory.providers.ListItemProvider;
 import com.mateuyabar.fritterfactory.providers.ModelProvider;
 import com.mateuyabar.fritterfactory.providers.fritterproviders.FritterProvider;
@@ -56,7 +57,7 @@ public class FritterFactoryTestWithSubmodel {
     @Test
     public void testSubModelAddingMoldPorviderWithStaticSubmodel(){
         FritterFactory fritterFactory = new FritterFactory();
-        fritterFactory.addProvider(SubModel.class, new ModelProvider<>(fritterFactory, SubModel.class, new SubModelMoldSaticModel()));
+        fritterFactory.addProvider(SubModel.class, new ModelProvider<>(fritterFactory, SubModel.class, new ClassMold(SubModelMoldSaticModel.class)));
         SubModel subModel = fritterFactory.build(SubModel.class);
 
         assertNotNull(subModel);
@@ -70,7 +71,7 @@ public class FritterFactoryTestWithSubmodel {
     @Test
     public void testSubModelAddingMoldPorviderWithSubmodelFritterProvider(){
         FritterFactory fritterFactory = new FritterFactory();
-        fritterFactory.addProvider(SubModel.class, new ModelProvider<>(fritterFactory, SubModel.class, new SubModelMoldSaticModel()));
+        fritterFactory.addProvider(SubModel.class, new ModelProvider<>(fritterFactory, SubModel.class, new ClassMold(SubModelMoldSaticModel.class)));
         SubModel subModel = fritterFactory.build(SubModel.class);
 
         assertNotNull(subModel);
@@ -103,6 +104,6 @@ public class FritterFactoryTestWithSubmodel {
     }
     public static class SubModelMold{
         String name = SUBMODEL_NAME;
-        FritterProvider<Model> model = new ModelFritterProvider<>(Model.class, ModelMold.class);
+        FritterProvider<Model> model = new ModelFritterProvider<>(Model.class, new ClassMold(ModelMold.class));
     }
 }

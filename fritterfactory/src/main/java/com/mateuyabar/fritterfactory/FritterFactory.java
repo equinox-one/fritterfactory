@@ -1,6 +1,7 @@
 package com.mateuyabar.fritterfactory;
 
 
+import com.mateuyabar.fritterfactory.mold.Mold;
 import com.mateuyabar.fritterfactory.providers.ModelProvider;
 
 import java.lang.reflect.Field;
@@ -30,14 +31,10 @@ public class FritterFactory {
     }
 
     public <T> T build(Class<T> modelClass) throws FritterFactoryException {
-        return build(modelClass, (Object) null);
+        return build(modelClass, null);
     }
 
-    public <T> T build(Class<T> modelClass, Class<?> moldClass) throws FritterFactoryException  {
-        return build(modelClass, newInstance(moldClass));
-    }
-
-    public <T> T build(Class<T> modelClass, Object mold) throws FritterFactoryException  {
+    public <T> T build(Class<T> modelClass, Mold mold) throws FritterFactoryException  {
         Provider<T> provider = providers.get(modelClass);
         if(mold==null && provider!=null)
             return provider.get();
@@ -45,7 +42,7 @@ public class FritterFactory {
             return buildModel(modelClass, mold);
     }
 
-    public <T> T buildModel(Class<T> modelClass, Object mold) throws FritterFactoryException  {
+    public <T> T buildModel(Class<T> modelClass, Mold mold) throws FritterFactoryException  {
         try {
             T result = modelClass.newInstance();
             for (Field field : getStoredFields(modelClass)) {
@@ -66,15 +63,11 @@ public class FritterFactory {
     }
 
     public <T> List<T> buildList(Class<T> modelClass, int size) throws FritterFactoryException {
-        return buildList(modelClass, size, (Object) null);
+        return buildList(modelClass, size, null);
     }
 
-    public <T> List<T> buildList(Class<T> modelClass, int size, Class<?> moldClass) throws FritterFactoryException {
-        return buildList(modelClass, size, newInstance(moldClass));
-    }
-
-    public <T> List<T> buildList(Class<T> modelClass, int size, Object mold) throws FritterFactoryException {
-        List<T> result = new ArrayList<T>();
+    public <T> List<T> buildList(Class<T> modelClass, int size, Mold mold) throws FritterFactoryException {
+        List<T> result = new ArrayList<>();
         for(int i=0; i<size; ++i){
             result.add(build(modelClass, mold));
         }
@@ -93,25 +86,11 @@ public class FritterFactory {
      * @return
      * @throws Exception
      */
-    private Object getMoldValue(Object moldInstance, Field field) throws Exception{
-        if(moldInstance==null)
-            return null;
-        Class<?> moldClass = moldInstance.getClass();
-        Field moldField = getStoredField(moldClass, field.getName());
-        if(moldField==null)
-            return null;
-        moldField.setAccessible(true);
-        Object moldFieldValue = moldField.get(moldInstance);
-        if(moldFieldValue instanceof Provider){
-            //its a provider, we generate a new value
-            moldFieldValue = ((Provider)moldFieldValue).get();
-        } else if (moldFieldValue instanceof com.mateuyabar.fritterfactory.providers.fritterproviders.FritterProvider) {
-            //its a fritter provider, we generate a new value
-            moldFieldValue = ((com.mateuyabar.fritterfactory.providers.fritterproviders.FritterProvider) moldFieldValue).get(this);
-        }
-        return moldFieldValue;
+    private Object getMoldValue(Mold moldInstance, Field field) throws Exception{
+        if(moldInstance!=null)
+            return moldInstance.getMoldValue(this, field);
+        else return null;
     }
-
 
     private Object generateValue(Field field) {
         Class<?> type = field.getType();

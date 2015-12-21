@@ -2,6 +2,8 @@ package com.mateuyabar.fritterfactory.test;
 
 
 import com.mateuyabar.fritterfactory.FritterFactory;
+import com.mateuyabar.fritterfactory.mold.ClassMold;
+import com.mateuyabar.fritterfactory.mold.InstanceMold;
 import com.mateuyabar.fritterfactory.providers.ModelProvider;
 import com.mateuyabar.fritterfactory.providers.primitives.StringProvider;
 import com.mateuyabar.fritterfactory.test.model.MyModel;
@@ -19,7 +21,7 @@ public class FritterFactoryTestWithMold {
 
     @Test
     public void buildModelWithMoldClass() throws Exception {
-        MyModel model = fritterFactory.build(MyModel.class, MyModelMold.class);
+        MyModel model = fritterFactory.build(MyModel.class, new ClassMold(MyModelMold.class));
         assertEquals(model.getStringVal(), SAMPLE_STRING);
         assertEquals(model.getIntVal(), SAMPLE_INTEGER);
         assertEquals(model.getIntegerVal(), (Integer) SAMPLE_INTEGER);
@@ -30,7 +32,7 @@ public class FritterFactoryTestWithMold {
         MyModelMold mold = new MyModelMold();
         mold.stringVal = new StringProvider().get();
 
-        MyModel model = fritterFactory.build(MyModel.class, mold);
+        MyModel model = fritterFactory.build(MyModel.class, new InstanceMold(mold));
         assertEquals(model.getStringVal(), mold.stringVal);
         assertEquals(model.getIntVal(), SAMPLE_INTEGER);
         assertEquals(model.getIntegerVal(), (Integer) SAMPLE_INTEGER);
@@ -40,10 +42,12 @@ public class FritterFactoryTestWithMold {
     public void buildModelWithMoldAsProvider() throws Exception {
         FritterFactory fritterFactory = new FritterFactory();
         MyModelMold mold = new MyModelMold();
-        mold.stringVal = new StringProvider().get();
-        fritterFactory.addProvider(MyModel.class, new ModelProvider<MyModel>(fritterFactory, MyModel.class, mold));
+        InstanceMold intanceMold = new InstanceMold(mold);
 
-        MyModel model = fritterFactory.build(MyModel.class, mold);
+        mold.stringVal = new StringProvider().get();
+        fritterFactory.addProvider(MyModel.class, new ModelProvider<MyModel>(fritterFactory, MyModel.class, intanceMold));
+
+        MyModel model = fritterFactory.build(MyModel.class, intanceMold);
         assertEquals(model.getStringVal(), mold.stringVal);
         assertEquals(model.getIntVal(), SAMPLE_INTEGER);
         assertEquals(model.getIntegerVal(), (Integer) SAMPLE_INTEGER);
@@ -51,7 +55,7 @@ public class FritterFactoryTestWithMold {
 
     @Test
     public void buildModelWithMoldClassWithProviders() throws Exception {
-        MyModel model = fritterFactory.build(MyModel.class, MyModelMoldWithProviders.class);
+        MyModel model = fritterFactory.build(MyModel.class, new ClassMold(MyModelMoldWithProviders.class));
         assertEquals(model.getStringVal(), SAMPLE_STRING);
         assertEquals(model.getIntVal(), SAMPLE_INTEGER);
         assertEquals(model.getIntegerVal(), (Integer) SAMPLE_INTEGER);

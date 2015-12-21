@@ -1,8 +1,6 @@
 package com.mateuyabar.fritterfactory.example;
 
-/**
- * Created by mateuyabar on 17/12/15.
- */
+
 public class Person {
     String name;
     String surname;
