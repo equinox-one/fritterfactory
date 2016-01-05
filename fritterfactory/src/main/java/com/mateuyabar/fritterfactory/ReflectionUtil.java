@@ -28,8 +28,8 @@ public class ReflectionUtil {
 	
 	/**
 	 * Returns the declared fields including fields form parent classes that are not transient neither synthetic
-	 * @param type
-	 * @return
+	 * @param type class type
+	 * @return declared fields
 	 */
 	public static Field[] getStoredFields(Class type) {
         List<Field> fields = new ArrayList<Field>();

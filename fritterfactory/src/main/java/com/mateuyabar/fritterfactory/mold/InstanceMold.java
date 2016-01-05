@@ -4,8 +4,9 @@ package com.mateuyabar.fritterfactory.mold;
 import com.mateuyabar.fritterfactory.FritterFactory;
 import com.mateuyabar.fritterfactory.providers.fritterproviders.FritterProvider;
 
-import javax.inject.Provider;
 import java.lang.reflect.Field;
+
+import javax.inject.Provider;
 
 import static com.mateuyabar.fritterfactory.ReflectionUtil.getStoredField;
 
@@ -21,9 +22,9 @@ public class InstanceMold implements Mold {
      * If the value is a provider it gets the value of the provider.
      * If not found, returns null
      *
-     * @oaram factory fritter factory
+     * @param factory fritter factory
      * @param field filed to look for
-     * @return
+     * @return value of the field
      * @throws Exception
      */
     public Object getMoldValue(FritterFactory factory, Field field) throws Exception{
