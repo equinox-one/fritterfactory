@@ -3,6 +3,8 @@ version '0.0.1'
 
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'cobertura'
+apply plugin: 'com.github.kt3k.coveralls'
 
 compileJava {
     sourceCompatibility = 1.6
@@ -24,6 +26,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.novoda:bintray-release:0.3.4'
+        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
 }
 
@@ -43,3 +47,5 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.+'
     testCompile 'com.mateuyabar:symbols:0.0.+'
 }
+
+cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
