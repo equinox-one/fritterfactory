@@ -45,7 +45,7 @@ dependencies {
     compile 'com.thedeanda:lorem:2.0'
 
     testCompile 'org.mockito:mockito-core:1.+'
-    testCompile 'com.mateuyabar:symbols:0.0.+'
+    testCompile 'one.equinox:symbols:0.0.+'
 }
 
 cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
