@@ -128,5 +128,5 @@ License
 
 
 
-[Symbols]:(https://github.com/equinox-one/symbols)
-[full example at github]:(https://github.com/equinox-one/fritterfactory-example)
+[Symbols]: https://github.com/equinox-one/symbols
+[full example at github]: https://github.com/equinox-one/fritterfactory-example
