@@ -30,7 +30,6 @@ public class FritterFactoryTestWithMapMold {
 
     @Test
     public void buildModelWithMapMold() throws Exception {
-
         Mold mapMold = new MapMold()
                 .put(MyModelSymbols.STRING_VAL, STRING_VAL)
                 .put(MyModelSymbols.INT_VAL, INTVAL)

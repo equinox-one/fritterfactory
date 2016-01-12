@@ -105,9 +105,9 @@ or via Maven:
 ```
 
 # What's next
-What we want to add to FritterFactory:
+Some ideas on how to improve this library
 
- - Use annotation processing to create mold classes instead of using symbols.
+ - Use annotation processing to create mold classes instead of using [Symbols].
 
 License
 =======
