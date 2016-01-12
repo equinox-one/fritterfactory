@@ -1,42 +1,45 @@
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven'
-    apply plugin: 'cobertura'
-    apply plugin: 'com.github.kt3k.coveralls'
+group 'one.equinox.fritterfactory'
+version '0.0.1'
 
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
+apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
 
+compileJava {
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+}
+
+publish {
+    userOrg = 'equinox-one'
+    groupId = 'one.equinox.fritterfactory'
+    artifactId = 'fritterfactory'
+    publishVersion = '0.0.1'
+    desc = 'Automatic model population'
+    website = 'https://github.com/equinox-one/fritterfactory'
+}
+
+buildscript {
     repositories {
         jcenter()
-        mavenCentral()
     }
-
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.3.4'
     }
+}
 
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
+repositories {
+    jcenter()
+    mavenCentral()
+}
 
-    artifacts {
-        archives sourcesJar
-        archives javadocJar
-    }
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
 
-    buildscript {
-        repositories {
-            mavenCentral()
-        }
+    compile 'javax.inject:javax.inject:1'
 
-        dependencies {
-            classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
-            classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-        }
-    }
+    //String generation
+    compile 'com.thedeanda:lorem:2.0'
 
-    cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
+    testCompile 'org.mockito:mockito-core:1.+'
+    testCompile 'com.mateuyabar:symbols:0.0.+'
 }

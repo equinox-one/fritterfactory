@@ -1,4 +1,2 @@
-rootProject.name = 'fritterfactory-project'
-include 'fritterfactory'
-include 'fritterfactory-example'
+rootProject.name = 'fritterfactory'
 
