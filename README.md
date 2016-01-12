@@ -9,7 +9,7 @@ When performing automatic test we need to create models constantly.
 Moreover when using hand made test, we may need to populate an application with fake data.
 Fritter Factory has been developed to solve this problems.
 
-#Android friendly
+# Android friendly
 Fritter Factory is Android Friendly: it does not use any reflection methods not implemented in the Android libraries. Therefore, it can be used in Android applications without any problem.
 
 # Show me an example
