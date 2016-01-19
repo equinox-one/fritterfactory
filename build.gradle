@@ -1,5 +1,5 @@
 group 'one.equinox.fritterfactory'
-version '0.0.1'
+version '0.0.2'
 
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
@@ -15,7 +15,7 @@ publish {
     userOrg = 'equinox-one'
     groupId = 'one.equinox.fritterfactory'
     artifactId = 'fritterfactory'
-    publishVersion = '0.0.1'
+    publishVersion = '0.0.2'
     desc = 'Automatic model population'
     website = 'https://github.com/equinox-one/fritterfactory'
 }

@@ -1,10 +1,12 @@
 package one.equinox.fritterfactory;
 
-import one.equinox.fritterfactory.providers.primitives.BooleanProvider;
-import one.equinox.fritterfactory.providers.primitives.DoubleProvider;
-import one.equinox.fritterfactory.providers.primitives.IntegerProvider;
+import one.equinox.fritterfactory.providers.basic.CalendarProvider;
+import one.equinox.fritterfactory.providers.basic.DateProvider;
+import one.equinox.fritterfactory.providers.primitives.*;
 import one.equinox.fritterfactory.providers.lorem.WordProvider;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,10 +30,19 @@ public class ProviderFactory {
             addProvider(String.class, new WordProvider());
             addProvider(Integer.class, new IntegerProvider());
             addProvider(int.class, new IntegerProvider());
+            addProvider(Long.class, new LongProvider());
+            addProvider(long.class, new LongProvider());
             addProvider(Double.class, new DoubleProvider());
             addProvider(double.class, new DoubleProvider());
+            addProvider(Float.class, new FloatProvider());
+            addProvider(float.class, new FloatProvider());
             addProvider(Boolean.class, new BooleanProvider());
             addProvider(boolean.class, new BooleanProvider());
+
+
+            addProvider(Date.class, new DateProvider());
+            addProvider(Calendar.class, new CalendarProvider());
+
         }
     }
 

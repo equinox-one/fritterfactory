@@ -80,7 +80,48 @@ That's not all! FritterFactory allows the generated models to be configurable. I
 ```
 
 # Get full Example
+
 You can download the [full example at github].
+
+# Which types can be automatically populated.
+
+By default, Fritter Factory is created using the DefaultProviderFactory. This allows to create the following random values:
+
+ - String.class
+ - Integer.class
+ - int.class
+ - Long.class
+ - long.class
+ - Double.class
+ - double.class
+ - Float.class
+ - float.class
+ - Boolean.class
+ - boolean.class
+ - Date.class
+ - Calendar.class
+
+It can also create complex models that use this sub types. However we may need to create our own providers in some cases. As an example, lets imagine that we use Joda time classes and we have a model that uses LocalDate.
+We will need to create a provider for this type like the following:
+
+```java
+public class LocalDateProvider implements Provider<LocalDate> {
+    Random random = new RandomFactory().get();
+
+    @Override
+    public LocalDate get() {
+        return new LocalDate(random.nextLong());
+    }
+}
+```
+
+and add it to the Fritter Factory
+
+```java
+fritterFactory.addProvider(LocalDate.class, new LocalDateProvider());
+```
+
+
 
 # Download
 
@@ -106,7 +147,7 @@ or via Maven:
 
 # What's next
 Some ideas on how to improve this library
-
+ - Create more default providers for other types.
  - Use annotation processing to create mold classes instead of using [Symbols].
 
 License
