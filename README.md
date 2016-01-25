@@ -101,6 +101,8 @@ By default, Fritter Factory is created using the DefaultProviderFactory. This al
  - Date.class
  - Calendar.class
 
+# Adding providers
+
 It can also create complex models that use this sub types. However we may need to create our own providers in some cases. As an example, lets imagine that we use Joda time classes and we have a model that uses LocalDate.
 We will need to create a provider for this type like the following:
 
@@ -121,7 +123,10 @@ and add it to the Fritter Factory
 fritterFactory.addProvider(LocalDate.class, new LocalDateProvider());
 ```
 
+# Default constructor required
 
+One last thing. To create new instances of your classes, FritterFactory needs to find a default constructor (one with no parameters).
+This constructor can be private (if desired), but must exist.
 
 # Download
 

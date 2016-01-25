@@ -4,6 +4,7 @@ package one.equinox.fritterfactory;
 import one.equinox.fritterfactory.mold.Mold;
 import one.equinox.fritterfactory.providers.ModelProvider;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,15 @@ public class FritterFactory {
     }
 
     public <T> T buildModel(Class<T> modelClass, Mold mold) throws FritterFactoryException  {
+        T result;
         try {
-            T result = modelClass.newInstance();
+            Constructor<T> constructor = modelClass.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            result = constructor.newInstance();
+        } catch (Exception e){
+            throw new FritterFactoryException(modelClass.getName()+" does not define default constructor required by Fritter Factoy",e);
+        }
+        try{
             for (Field field : ReflectionUtil.getStoredFields(modelClass)) {
                 field.setAccessible(true);
                 Object value = getMoldValue(mold, field);
