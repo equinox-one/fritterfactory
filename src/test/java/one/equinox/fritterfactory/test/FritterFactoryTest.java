@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class FritterFactoryTest {
     FritterFactory fritterFactory = new FritterFactory();
@@ -21,7 +22,19 @@ public class FritterFactoryTest {
         assertNotNull(model.getStringVal());
         assertNotNull(model.getIntegerVal());
         assertNotEquals(model.getIntVal(),0);
+        assertNotNull(model.getFinalStringVal());
 
+        assertNotNull(MyModel.sNoVal);
+
+        // Make sure that non-null (or final) statics are not overwritten
+        assertEquals(MyModel.sVal, "My String");
+        assertEquals(MyModel.fVal, "My final String");
+        assertNull(MyModel.fNullVal);
+
+        // Assert ignored fields are still null
+        assertNull(model.getIgnoredStringVal());
+        assertNull(model.getFinalIgnoredString());
+        assertNull(MyModel.sIgnoredString);
     }
 
     @Test
@@ -32,6 +45,7 @@ public class FritterFactoryTest {
             assertNotNull(model.getStringVal());
             assertNotNull(model.getIntegerVal());
             assertNotEquals(model.getIntVal(), 0);
+            assertNotNull(model.getFinalStringVal());
         }
     }
 
@@ -43,7 +57,6 @@ public class FritterFactoryTest {
         assertNotEquals(model.getStringVal(), model2.getStringVal());
         assertNotEquals(model.getIntegerVal(), model2.getIntegerVal());
         assertNotEquals(model.getIntVal(), model2.getIntVal());
+        assertNotEquals(model.getFinalStringVal(), model2.getFinalStringVal());
     }
-
-
 }
