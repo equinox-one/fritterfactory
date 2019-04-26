@@ -15,7 +15,7 @@ publish {
     userOrg = 'equinox-one'
     groupId = 'one.equinox.fritterfactory'
     artifactId = 'fritterfactory'
-    publishVersion = '0.0.2'
+    publishVersion = '0.0.4'
     desc = 'Automatic model population'
     website = 'https://github.com/equinox-one/fritterfactory'
 }
