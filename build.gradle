@@ -1,5 +1,5 @@
 group 'one.equinox.fritterfactory'
-version '0.0.2'
+version '0.0.4'
 
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'

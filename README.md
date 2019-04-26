@@ -24,6 +24,12 @@ public class Person {
     String description;
     Category category;
     String image;
+    final String country; // fritter will populate this field
+    @FritterIgnoreField
+    String memberId; // fritter will leave this field alone
+    
+    static String CATEGORY; // fritter will populate this field
+    static String TAG = 1; // fritter won't touch static field with a non-null value
 }
 ```
 
