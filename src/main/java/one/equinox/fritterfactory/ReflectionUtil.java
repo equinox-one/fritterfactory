@@ -19,6 +19,8 @@
 package one.equinox.fritterfactory;
 
 
+import one.equinox.fritterfactory.annotation.FritterIgnoreField;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -36,7 +38,12 @@ public class ReflectionUtil {
         for (Class<?> c = type; c != null; c = c.getSuperclass()) {
             Field[] innerFields = c.getDeclaredFields();
             for(Field field:innerFields){
-            	if(!field.isSynthetic() &&  !isTransient(field)){
+            	if(!field.isSynthetic() && !isTransient(field) && !isIgnored(field) && !isStaticFinal(field)){
+					if (isStatic(field) && !hasNullValue(field)) {
+						// Skip static field with a non-null value
+						continue;
+					}
+
             		fields.add(field);
             	}
             }
@@ -57,42 +64,31 @@ public class ReflectionUtil {
 		return null;
 	}
 
-	public static boolean isTransient(Field field){
+	private static boolean isTransient(Field field){
 		return Modifier.isTransient(field.getModifiers());
 	}
-	
 
-	
-	public static boolean isNull(Field field, Object model) throws IllegalAccessException {
+	private static boolean isIgnored(Field field) {
+		return field.isAnnotationPresent(FritterIgnoreField.class);
+	}
+
+	private static boolean isStatic(Field field) {
+		return Modifier.isStatic(field.getModifiers());
+	}
+
+	private static boolean isStaticFinal(Field field) {
+		int modifiers = field.getModifiers();
+		return Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers);
+	}
+
+	private static boolean hasNullValue(Field field) {
 		field.setAccessible(true);
-
-			Object value = field.get(model);
-			if(value==null)
-				return true;
-			Class<?> fieldClass = field.getType();
-			if(int.class.isAssignableFrom(fieldClass)){
-				//TODO check this: we define 0 as a null value for int
-				int intValue = (Integer) value;
-				return intValue==0;
-			}
-			return false;
-			
-
+		try {
+			return (null == field.get(field.getClass()));
+		} catch (Throwable t) {
+			return true;
+		}
 	}
-
-	public static boolean isInt(Class<?> fieldClass){
-		return Integer.class.isAssignableFrom(fieldClass) || int.class.isAssignableFrom(fieldClass);
-	}
-	
-	public static boolean isBoolean(Class<?> fieldClass){
-		return Boolean.class.isAssignableFrom(fieldClass) || boolean.class.isAssignableFrom(fieldClass);
-	}
-
-    public static void setValue(Object model, String attribute, Object value) throws NoSuchFieldException, IllegalAccessException {
-		Field field = model.getClass().getField(attribute);
-		field.setAccessible(true);
-		field.set(model, value);
-    }
 
 	public static <T> T newInstance(Class<T> clazz) throws FritterFactoryException {
 		try{
