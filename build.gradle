@@ -15,7 +15,7 @@ publish {
     userOrg = 'equinox-one'
     groupId = 'one.equinox.fritterfactory'
     artifactId = 'fritterfactory'
-    publishVersion = '0.0.4'
+    publishVersion = '0.0.5'
     desc = 'Automatic model population'
     website = 'https://github.com/equinox-one/fritterfactory'
 }
@@ -37,15 +37,16 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testImplementation group: 'junit', name: 'junit', version: '4.11'
 
-    compile 'javax.inject:javax.inject:1'
+    implementation'javax.inject:javax.inject:1'
 
     //String generation
-    compile 'com.thedeanda:lorem:2.0'
+    implementation 'com.thedeanda:lorem:2.0'
 
-    testCompile 'org.mockito:mockito-core:1.+'
-    testCompile 'one.equinox:symbols:0.0.+'
+    testImplementation 'org.mockito:mockito-core:1.+'
+    testImplementation 'one.equinox:symbols:0.0.+'
+    annotationProcessor 'one.equinox:symbols:0.0.+'
 }
 
 cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report

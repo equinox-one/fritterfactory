@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/fritterfactory.iml" filepath="$PROJECT_DIR$/fritterfactory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fritterfactory.iml" filepath="$PROJECT_DIR$/fritterfactory.iml" group="fritterfactory" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/fritterfactory_main.iml" filepath="$PROJECT_DIR$/.idea/modules/fritterfactory_main.iml" group="fritterfactory" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/fritterfactory_test.iml" filepath="$PROJECT_DIR$/.idea/modules/fritterfactory_test.iml" group="fritterfactory" />
     </modules>

@@ -100,6 +100,9 @@ public class FritterFactory {
         Class<?> type = field.getType();
         Provider<?> provider = providers.get(type);
         if(provider==null){
+            if(type.isEnum()){
+                return type.getEnumConstants()[0];
+            }
             //We hope it is a submodel
             provider = getProvider(type);
         }
