@@ -46,7 +46,7 @@ public class FritterFactory {
             constructor.setAccessible(true);
             result = constructor.newInstance();
         } catch (Exception e){
-            throw new FritterFactoryException(modelClass.getName()+" does not define default constructor required by Fritter Factoy",e);
+            throw new FritterFactoryException(modelClass.getName()+" does not define default constructor required by Fritter Factory",e);
         }
         try{
             for (Field field : ReflectionUtil.getStoredFields(modelClass)) {
